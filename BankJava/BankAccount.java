@@ -32,6 +32,7 @@ public class BankAccount {
 	}
 
 	public void checkbalance() {
+		System.out.println("Account Nnumber : "+accountNo);
 		System.out.println("name : "+accountHolderName);
 		System.out.println("account balance : " + balance);
 	}
