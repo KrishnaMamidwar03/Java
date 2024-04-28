@@ -1,9 +1,11 @@
 package BankAccount;
+//import java.util.*;
 
 public class BankAccount {
 	private int accountNo;
 	private String accountHolderName;
 	private double balance;
+
 
 	public BankAccount(int accountNo, String accountHolderName, double balance) {
 		this.accountNo = accountNo;
@@ -14,7 +16,7 @@ public class BankAccount {
 	public void deposit(double amount) {
 		if (amount > 0) {
 			balance = balance + amount;
-			System.out.println("name : "+accountHolderName);
+			System.out.println("name : " + accountHolderName);
 			System.out.println("amount " + amount + "deposited successfully");
 		} else {
 			System.out.println("amount is invalid.");
@@ -26,14 +28,14 @@ public class BankAccount {
 			System.out.println("the amount is insufficient for withdraw");
 		} else {
 			balance = balance - amount;
-			System.out.println("name : "+accountHolderName);
+			System.out.println("name : " + accountHolderName);
 			System.out.println("withdraw " + amount + " succesfully");
 		}
 	}
 
 	public void checkbalance() {
-		System.out.println("Account Nnumber : "+accountNo);
-		System.out.println("name : "+accountHolderName);
+		System.out.println("Account number : " + accountNo);
+		System.out.println("name : " + accountHolderName);
 		System.out.println("account balance : " + balance);
 	}
 
@@ -42,10 +44,11 @@ public class BankAccount {
 //		return "accountNo : "+accountNo+"/naccountHolderName : "+accountHolderName+"/nbalance : "+balance;
 //	}
 
-//	public int getacNo() {
-//		return this.accountNo;
-//	}
-//	
+	public int getAcNo() {
+		return this.accountNo;
+	}
+	
+	
 //	public String getaccountHolderName() {
 //		return this.accountHolderName; 
 //	}
