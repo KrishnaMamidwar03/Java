@@ -2,7 +2,7 @@ package com.app.Customer;
 
 import java.time.LocalDate;
 
-public class Customer {
+public class Customer implements Comparable<Customer>{
 	private int customerId;
 	private String firstName;
 	private String lastName;
@@ -32,7 +32,7 @@ public class Customer {
 	}
 
 	public String toString() {
-		return "FirstName = " + firstName + " LastName = " + lastName + " email = " + email + " Password = " + password
+		return "cust Id: "+customerId+" FirstName = " + firstName + " LastName = " + lastName + " email = " + email + " Password = " + password
 				+ " registrationAmount = " + registrationAmount + " date = " + date + " Plan buy = " + plan;
 	}
 
@@ -45,6 +45,12 @@ public class Customer {
 		}
 		return false;
 	}
+	
+	@Override
+	public int compareTo(Customer cust) {
+		return this.getEmail().compareTo(cust.getEmail());
+	}
+	
 	public int getCustomerId() {
 		return customerId;
 	}

@@ -17,7 +17,8 @@ public class CustomerApp {
 //			int counter = 0;
 			while (!exit) {
 				System.out.println("Options : 1.new Customer Entry \n" + "2.Display ALL customers \n"
-						+ "3. cutomer signing \n" + "4. update password \n" +"5. unsubscribe \n"+ "0.exit");
+						+ "3. cutomer signing \n" + "4. update password \n" + "5. unsubscribe \n"+"6. sort by email \n"
+						+ "7. sort in ascending order by date of birth. \n"+"8.sort by first name in desc order \n" + "0.exit");
 				System.out.println("enter your choice : ");
 				try {
 					switch (scan.nextInt()) {
@@ -61,6 +62,23 @@ public class CustomerApp {
 					case 5:
 						System.out.println("\n Enter email to unsubscribe : ");
 						CMSUtils.deleteCustomer(scan.next(), customers);
+						break;
+					case 6:
+//						Collections.sort(customers, new CompareEmail());
+						Collections.sort(customers);
+						
+						break;
+					case 7:
+						System.out.println("sort by date and surname");
+						Collections.sort(customers, new Comparator<Customer>() {
+							public int compare(Customer c1, Customer c2) {
+								int dobCompare = c1.getDob().compareTo(c2.getDob());
+								if (dobCompare == 0) {
+									return c1.getLastName().compareTo(c2.getLastName());
+								}
+								return dobCompare;
+							}
+						});
 						break;
 
 					case 0:
