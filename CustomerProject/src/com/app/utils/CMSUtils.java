@@ -1,30 +1,29 @@
 package com.app.utils;
 
-import java.util.List;
+import java.util.Map;
 
 import com.app.Customer.Customer;
 import com.app.Exception.CustomerException;
 
 public class CMSUtils {
 
-	public static Customer authentcateCustomer(String email, String password, List<Customer> list)throws CustomerException {
-		Customer newCust = new Customer(email);
-		int index = list.indexOf(newCust);
-		if (index == -1)
+	public static Customer authentcateCustomer(String email, String password, Map<String, Customer> maplist)
+			throws CustomerException {
+		Customer newCust = maplist.get(email);
+		if (newCust == null)
 			throw new CustomerException("invalid email.");
-		Customer customer = list.get(index);
 
-		if (customer.getPassword().equals(password))
-			return customer;
+		if (newCust.getPassword().equals(password))
+			return newCust;
+
 		throw new CustomerException("invalid password.");
 	}
 
-	public static String deleteCustomer(String email, List<Customer>customerList)throws CustomerException {
-		int index = customerList.indexOf(new Customer(email));
-		if(index ==-1)
+	public static String deleteCustomer(String email, Map<String, Customer> removeCustomer) throws CustomerException {
+		if (removeCustomer == null)
 			throw new CustomerException("can't unsubscribe : invalid email.");
-		
-		return "Removed details of "+customerList.remove(index).getFirstName();
-		
+
+		return "Removed details of " + removeCustomer.remove(email).getFirstName();
+
 	}
 }

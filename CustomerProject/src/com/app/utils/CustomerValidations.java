@@ -2,7 +2,7 @@ package com.app.utils;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
+import java.util.Map;
 
 import com.app.Customer.Customer;
 import com.app.Customer.Plan;
@@ -11,22 +11,24 @@ import com.app.Exception.CustomerException;
 public class CustomerValidations {
 
 	public static Customer ValidateInput(String firstName, String lastName, String email, String password,
-			double registrationAmount, String date, String plan, List<Customer> customers) throws CustomerException {
+			double registrationAmount, String date, String plan, Map<String, Customer> customers)
+			throws CustomerException {
 
 		checkForDuplicate(email, customers);
 		LocalDate createDate = parseDate(date);
 		Plan splan = servicePlan(plan, registrationAmount);
 		validPassword(password);
 		AgeValidation(date);
+		ChechEmail(email);
 		return new Customer(firstName, lastName, email, password, registrationAmount, createDate, splan);
 	}
 
 	public static Plan servicePlan(String plan1, double registrationAmount) throws CustomerException {
-//		return Plan.valueOf(plan1.toUpperCase());
+
 		Plan plans = Plan.valueOf(plan1.toUpperCase());
-		if (plans.getPlanCost() == registrationAmount)
-			return plans;
+		if (plans.getPlanCost() != registrationAmount)
 		throw new CustomerException("Registration amount doen't match with the plan.");
+		return plans;
 	}
 
 	public static LocalDate parseDate(String date) {
@@ -39,28 +41,25 @@ public class CustomerValidations {
 			throw new CustomerException("password format not accepted!");
 		}
 	}
-	
 
-	
-	public static void AgeValidation(String date)throws CustomerException{
-		int age = Period.between(LocalDate.parse(date),LocalDate.now()).getYears();
-		if(age<21) {
+	public static void ChechEmail(String email) throws CustomerException {
+		String regex = "^[a-z0-9]+@gmail\\.com$";
+		if (!email.matches(regex))
+			throw new CustomerException("email format is not valid.");
+	}
+
+	public static void AgeValidation(String date) throws CustomerException {
+		int age = Period.between(LocalDate.parse(date), LocalDate.now()).getYears();
+		if (age < 21) {
 			throw new CustomerException("you are under age.");
 		}
 	}
 
-	public static void checkForDuplicate(String email, List<Customer> customers) throws CustomerException {
-		Customer cm = new Customer(email);
+	public static void checkForDuplicate(String email, Map<String, Customer> customers) throws CustomerException {
 
-		if (customers.contains(cm))
+		if (customers.containsKey(email))
 			throw new CustomerException("email already existed.");
 
-//		for (Customer c : customers) {
-//			if (c != null && c.equals(cm)) {
-//				System.out.println("duplicate method");
-//				throw new CustomerException("Email already registered...");
-//			}
-//		}
 	}
 
 }
