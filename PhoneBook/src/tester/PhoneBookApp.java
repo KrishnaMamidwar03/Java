@@ -19,7 +19,7 @@ public class PhoneBookApp {
 			while (!exit) {
 				System.out.println("Menu :");
 				System.out.println("1.Add the details for phone number.\n" + "2.show list\n"
-						+ "3.Update mobile number\n" + "4.delete contact" + "0.exit");
+						+ "3.Update mobile number\n" + "4.delete contact\n" + "0.exit");
 
 				System.out.println("enter your choice : ");
 				int choice = scan.nextInt();
@@ -28,6 +28,7 @@ public class PhoneBookApp {
 					switch (choice) {
 					case 0:
 						exit = true;
+						System.out.println("Program exit!!!");
 						break;
 
 					case 1:
