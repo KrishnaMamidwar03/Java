@@ -1,11 +1,13 @@
 package com.app.tester;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 import com.app.entity.TaskManagerEntity;
 import com.app.entity.taskStatus;
+import com.app.validations.DateComparator;
 import com.app.validations.DisplayPending;
 import com.app.validations.TaskAvailability;
 import com.app.validations.Validations;
@@ -25,6 +27,8 @@ public class taskManagerApp {
 						+ "6.  Display all tasks sorted by taskDate \r\n" + "7.list all task \r\n" + "0. exit");
 				System.out.println("enter your choice ");
 				int choice = scan.nextInt();
+				
+				try {
 				switch (choice) {
 				case 1:
 					System.out.println("enter details \n" + "taskName, description, taskDate, status, active");
@@ -60,6 +64,13 @@ public class taskManagerApp {
 					System.out.println( DisplayPending.displayPending(list));
 //					l.stream().forEach(p -> System.out.println(p));
 					break;
+					
+				case 6:
+					DateComparator date = new DateComparator();
+					Collections.sort(list,date);
+//					list.stream().forEach(l->System.out.println(l));
+					
+					break;
 
 				case 7:
 					list.stream().forEach((a) -> System.out.println(a));
@@ -69,6 +80,9 @@ public class taskManagerApp {
 					System.out.println("EXIT from program");
 					exit = true;
 					break;
+				}
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
 				}
 			}
 		}
