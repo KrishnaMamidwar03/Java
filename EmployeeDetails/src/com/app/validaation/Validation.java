@@ -10,9 +10,10 @@ import com.app.exception.EmployeeException;
 public class Validation {
 
 	//validate date of joining 
-	public static EmployeeEntity checkValidation(Application fte, String name, String joiningDate, int phoneNum,
-			int aadharNum, List<EmployeeEntity> list) {
+	public static EmployeeEntity checkValidation(Application fte, String name, String joiningDate, String phoneNum,
+			String aadharNum, List<EmployeeEntity> list) throws EmployeeException {
 		LocalDate date = LocalDate.parse(joiningDate);
+		checkPhone(phoneNum);
 		return new EmployeeEntity(fte, name, date, phoneNum, aadharNum);
 	}
 	
@@ -32,11 +33,28 @@ public class Validation {
 	
 	public static EmployeeEntity searchByAadhar(int aadharrNum, List<EmployeeEntity> list) throws EmployeeException {
 		for (EmployeeEntity e : list) {
-			if (e.getAadharNum() == (aadharrNum)) {
+			if (e.getAadharNum().equals(aadharrNum)) {
 				return e;
 			}
 		}
 		throw new EmployeeException("employee not found");
+	}
+	
+	
+	//mobile number validation
+	public static void checkPhone(String pnum) throws EmployeeException {
+		String regex = "^[0-9]*$ ";
+		if(!pnum.matches(regex) && pnum.length()!=10) {
+			throw new EmployeeException("Phone number is not validate!!!");
+		}
+	}
+	
+	//aadhar number validation
+	public static void chechAadhar(String aadhar)throws EmployeeException{
+		String regex =  "^[0-9]\\S+$";
+		if(!aadhar.matches(regex) && aadhar.length()!=12) {
+			throw new EmployeeException("Aadhar number is not validate!!!");
+		}
 	}
 	
 	

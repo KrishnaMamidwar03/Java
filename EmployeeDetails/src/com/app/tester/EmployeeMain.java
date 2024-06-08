@@ -33,15 +33,15 @@ public class EmployeeMain {
 //					int id, Application type, String name, LocalDate joiningDate, Int phoneNum, Int aadharNum
 
 						System.out.println("1.name 2.joiningDate 3.phoneNumber 4.aadharNumber");
-						EmployeeEntity e = checkValidation(Application.FTE, scan.next(), scan.next(), scan.nextInt(),
-								scan.nextInt(), list);
+						EmployeeEntity e = checkValidation(Application.FTE, scan.next(), scan.next(), scan.next(),
+								scan.next(), list);
 						list.add(e);
 						System.out.println("employee added");
 						break;
-
+						
 					case 2:
 						System.out.println("1.name 2.joiningDate 3.phoneNumber 4.aadharNumber");
-						e = checkValidation(Application.PTE, scan.next(), scan.next(), scan.nextInt(), scan.nextInt(),
+						e = checkValidation(Application.PTE, scan.next(), scan.next(), scan.next(), scan.next(),
 								list);
 						list.add(e);
 						System.out.println("employee added");
@@ -59,18 +59,18 @@ public class EmployeeMain {
 						e = searchByAadhar(scan.nextInt(), list);
 						System.out.println("employee found :");
 						System.out.println(e);
-						
+
 						break;
-						
+
 					case 5:
 						System.out.println("list of all employee as per joining date: ");
-						list.stream().forEach(l->System.out.println(l));
+						list.stream().forEach(l -> System.out.println(l));
 						break;
-						
+
 					case 6:
 						Comparator c = new Comparator();
-						Collections.sort(list,c);
-						list.stream().forEach(l->System.out.println(l));
+						Collections.sort(list, c);
+						list.stream().forEach(l -> System.out.println(l));
 						break;
 
 					case 0:

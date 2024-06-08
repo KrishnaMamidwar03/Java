@@ -8,14 +8,14 @@ public class EmployeeEntity {
 	private Application type;
 	private String name;
 	private LocalDate joiningDate;
-	private int phoneNum;
-	private int aadharNum;
+	private String phoneNum;
+	private String aadharNum;
 	private static int count;
 	
 	
 
 
-	public EmployeeEntity( Application type, String name, LocalDate joiningDate, int phoneNum, int aadharNum) {
+	public EmployeeEntity( Application type, String name, LocalDate joiningDate, String phoneNum, String aadharNum) {
 		super();
 		this.id = ++count;
 		this.type = type;
@@ -43,12 +43,12 @@ public class EmployeeEntity {
 	}
 
 
-	public int getAadharNum() {
+	public String getAadharNum() {
 		return aadharNum;
 	}
 
 
-	public void setAadharNum(int aadharNum) {
+	public void setAadharNum(String aadharNum) {
 		this.aadharNum = aadharNum;
 	}
 
